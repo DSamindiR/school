@@ -128,11 +128,11 @@ if (isset($_POST['register_class']))
                            <form action="class_register.php" class="signup-form" id="mainForm" method="post" enctype="multipart/form-data">
 
                                     <div class="form-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Class Name" name="class_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                                        <input type="text" class="form-control" placeholder="Class Name" name="class_name" required data-parsley-pattern="^[0-9a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <input type="text" class="form-control" placeholder="No of Students" name="no_students" required data-parsley-pattern="^[0-9a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                                        <input type="text" class="form-control" placeholder="No of Students" name="no_students" required data-parsley-pattern="^[0-9 ]+$" data-parsley-trigger="keyup"/>
                                     </div>
 
 
@@ -158,7 +158,7 @@ if (isset($_POST['register_class']))
                                     <div class="form-group mb-3">
                                         <label for="tic">Select Class Teacher</label>
                                         <select  name="teacher_incharge" class="form-control sl2" required>
-                                            <option selected disabled> Select Activity Head</option>
+                                            <option selected disabled> Select Class Teacher</option>
                                                 <?php
                                                     
                                                     $get_cat = "SELECT * FROM teacher";
@@ -222,12 +222,12 @@ if (isset($_POST['register_class']))
 
                 <div class="form-group">
                   <label for="class_name">Class Name:</label>
-                  <input type="text" class="form-control" placeholder="Enter Class Name" name="class_name" id="class_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Enter Class Name" name="class_name" id="class_name" required data-parsley-pattern="^[0-9a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                 </div>
 
                 <div class="form-group">
                   <label for="no_students">No Of Students:</label>
-                  <input type="text" class="form-control" placeholder="Enter no of students" name="no_students" id="no_students" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Enter no of students" name="no_students" id="no_students" required data-parsley-pattern="^[0-9 ]+$" data-parsley-trigger="keyup"/>
                 </div>
 
 
@@ -408,7 +408,7 @@ if (isset($_POST['register_class']))
       // console.log(0)
       $('#example').DataTable();
       // console.log(1)
-      $('#mainForm').parsley();
+      // $('#mainForm').parsley();
       
       // $('.sl2').select2();
       // console.log(3)
