@@ -5,21 +5,23 @@
 
 <?php 
 /*================================================Activity Register==================================*/
-if (isset($_POST['register_cocurri'])) 
+if (isset($_POST['register_class'])) 
 {
 
-            $cocurri_name=mysqli_real_escape_string($conn, $_POST['cocurri_name']);
+            $class_name=mysqli_real_escape_string($conn, $_POST['class_name']);
+            $no_students=mysqli_real_escape_string($conn, $_POST['no_students']);
+            $setion=mysqli_real_escape_string($conn, $_POST['section']);
             $teacher_incharge=mysqli_real_escape_string($conn, $_POST['teacher_incharge']);
 
-            $sql_select2="SELECT * FROM corecurricularactivities WHERE name='$cocurri_name' LIMIT 1";
+            $sql_select2="SELECT * FROM class WHERE Name='$class_name' LIMIT 1";
             $result2=mysqli_query($conn, $sql_select2);
             $user=mysqli_fetch_array($result2);
 
             if ($user)
             {
-                 if ($user['name']===$cocurri_name)
+                 if ($user['Name']===$class_name)
                  {
-                    array_push($error, "<br>Activity already exists");
+                    array_push($error, "<br>Class already exists");
                  }
             }
 
@@ -27,11 +29,11 @@ if (isset($_POST['register_cocurri']))
             {
   /*sports     idSports | SportName | TeacherInCharge | delete_status | status  */
 
-                $sql="INSERT INTO corecurricularactivities(name,TeacherInCharge,delete_status,status) VALUES('$cocurri_name','$teacher_incharge',1,0)";
+                $sql="INSERT INTO class(Name,NoOfStudents,section_idSection,Teacher_idTeacher,delete_status,status) VALUES('$class_name','$no_students','$setion','$teacher_incharge',1,0)";
                 if (mysqli_query($conn,$sql)) {
-                    ?><script type="text/javascript">alert("Activity Registerd");</script><?php
+                    ?><script type="text/javascript">alert("Class Registerd");</script><?php
                 }else{
-                    ?><script type="text/javascript">alert("Activity Register error");</script><?php
+                    ?><script type="text/javascript">alert("Class Register error");</script><?php
                 }
 
             }else{
@@ -48,11 +50,11 @@ if (isset($_POST['register_cocurri']))
         $id=mysqli_real_escape_string($conn,$_GET['delete_id']);
   /*sports     idSports  SportName TeacherInCharge delete_status status  */
 
-         $sql="UPDATE corecurricularactivities SET delete_status = 0 WHERE idCurricularActivities='$id'";
+         $sql="UPDATE class SET delete_status = 0 WHERE idClass='$id'";
 
         if (mysqli_query($conn,$sql))
         {
-           echo "<script>window.open('cocurri_register.php','_self')</script>";
+           echo "<script>window.open('class_register.php','_self')</script>";
         }
     }
 
@@ -63,25 +65,27 @@ if (isset($_POST['register_cocurri']))
 /*================================================Update Activity ==================================*/
   /*sports     idSports | SportName | TeacherInCharge | delete_status | status  */
 
-        if (isset($_POST['update_cocurri'])) 
+        if (isset($_POST['update_class'])) 
         {
 
-            $hidden_cocurri_id=mysqli_real_escape_string($conn, $_POST['hidden_cocurri_id']);
-            $cocurri_name=mysqli_real_escape_string($conn, $_POST['cocurri_name']);
+            $hidden_class_id=mysqli_real_escape_string($conn, $_POST['hidden_class_id']);
+            $class_name=mysqli_real_escape_string($conn, $_POST['class_name']);
+            $no_students=mysqli_real_escape_string($conn, $_POST['no_students']);
+            $section_id=mysqli_real_escape_string($conn, $_POST['section']);
             $teacher_incharge=mysqli_real_escape_string($conn, $_POST['teacher_incharge']);
 
 
             if (count($error)==0)
             {
                
-                        $update_subject = "UPDATE corecurricularactivities SET name='$cocurri_name',TeacherInCharge='$teacher_incharge' WHERE idCurricularActivities
-                        ='$hidden_cocurri_id' LIMIT 1";
+                        $update_subject = "UPDATE class SET Name='$class_name', NoOfStudents='$no_students', section_idSection='$section_id', Teacher_idTeacher='$teacher_incharge' WHERE idClass
+                        ='$hidden_class_id' LIMIT 1";
                           mysqli_query($conn,$update_subject);     
 
             }
             else
             {
-                 ?><script type="text/javascript">alert("Activity Update error 1");</script><?php
+                 ?><script type="text/javascript">alert("Class Update error 1");</script><?php
             }
 
         }
@@ -97,13 +101,13 @@ if (isset($_POST['register_cocurri']))
 
 
 <!-- =====================================The insert Activity Modal ========================================-->
-    <div class="modal fade" id="regcocurri" tabindex="-1" role="dialog">
+    <div class="modal fade" id="regclass" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
                 <!-- Header -->
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-white">Add New Co-Curricular Activity</h5>
+                    <h5 class="modal-title text-white">Add New Class</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -121,14 +125,38 @@ if (isset($_POST['register_cocurri']))
                            ?>
                     
 
-                           <form action="cocurri_register.php" class="signup-form" id="mainForm" method="post" enctype="multipart/form-data">
+                           <form action="class_register.php" class="signup-form" id="mainForm" method="post" enctype="multipart/form-data">
 
                                     <div class="form-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Activity Name" name="cocurri_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                                        <input type="text" class="form-control" placeholder="Class Name" name="class_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="tic">Select Teacher In Charge</label>
+                                        <input type="text" class="form-control" placeholder="No of Students" name="no_students" required data-parsley-pattern="^[0-9a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="section">Select Section</label>
+                                            <select  name="section"  class="form-control s12" required>
+                                                <option selected disabled> Select Section</option>
+                                            
+                                                      <?php
+                                                                    
+                                                            $get_cat = "SELECT * FROM section";
+                                                            $run_cat = mysqli_query($conn, $get_cat);
+                                                                                            
+                                                            while ($row_cat=mysqli_fetch_array($run_cat)) {
+                                                                $idsection = $row_cat['idSection'];
+                                                                $Name = $row_cat['sectionName'];
+                                                                                                    
+                                                                echo " <option value='$idsection'> $Name </option>";
+                                                            } ?>           
+                                            </select>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="tic">Select Class Teacher</label>
                                         <select  name="teacher_incharge" class="form-control sl2" required>
                                             <option selected disabled> Select Activity Head</option>
                                                 <?php
@@ -145,7 +173,7 @@ if (isset($_POST['register_cocurri']))
                                                 ?> 
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-success float-right" name="register_cocurri">ADD</button>
+                                    <button type="submit" class="btn btn-success float-right" name="register_class">ADD</button>
                             </form>
                 </div>
 
@@ -166,13 +194,13 @@ if (isset($_POST['register_cocurri']))
 
 
 <!-- =====================================The update Activity modal ========================================-->
-    <div class="modal fade" id="updatecocurri" tabindex="-1" role="dialog" >
+    <div class="modal fade" id="updateclass" tabindex="-1" role="dialog" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
                 <!-- Header -->
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-white">Update Activity</h5>
+                    <h5 class="modal-title text-white">Update Class</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -181,26 +209,54 @@ if (isset($_POST['register_cocurri']))
         
         <!-- Modal body -->
         <div class="modal-body">
-              <form action="cocurri_register.php" id="mainForm" method="post" enctype="multipart/form-data">
+              <form action="class_register.php" id="mainForm" method="post" enctype="multipart/form-data">
                 
                 <div class="form-group">
-                  <label for="cocurri_id">Activity id:</label>
-                  <input type="text" class="form-control" placeholder="Enter Activity id" name="cocurri_id" id="cocurri_id" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup" disabled />
+                  <label for="class_id">Class id:</label>
+                  <input type="text" class="form-control" placeholder="Enter Class id" name="class_id" id="class_id" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup" disabled />
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control" placeholder="Enter Activity id" name="hidden_cocurri_id" id="hidden_cocurri_id" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                  <input type="hidden" class="form-control" placeholder="Enter Class id" name="hidden_class_id" id="hidden_class_id" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                 </div>
 
                 <div class="form-group">
-                  <label for="subject_name">Activity Name:</label>
-                  <input type="text" class="form-control" placeholder="Enter Activity Name" name="cocurri_name" id="cocurri_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                  <label for="class_name">Class Name:</label>
+                  <input type="text" class="form-control" placeholder="Enter Class Name" name="class_name" id="class_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                 </div>
+
+                <div class="form-group">
+                  <label for="no_students">No Of Students:</label>
+                  <input type="text" class="form-control" placeholder="Enter no of students" name="no_students" id="no_students" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="section"></label>
+                    <select  name="section"  class="form-control" id="section" required>
+                        <option selected disabled> Select Section</option>
+                    
+                            <?php
+                                                                    
+                                $get_cat = "SELECT * FROM section";
+                                $run_cat = mysqli_query($conn, $get_cat);
+                                                                                            
+                                    while ($row_cat=mysqli_fetch_array($run_cat)) {
+                                        $idsection = $row_cat['idSection'];
+                                        $Name = $row_cat['sectionName'];
+                                                                                                    
+                                    echo " <option value='$idsection'> $Name </option>";
+                                    } ?>           
+                    </select>
+                </div>
+
+
 
                 <div class="form-group">
                   <label for="subject_head"></label>
                     <select  name="teacher_incharge"  class="form-control" id="teacher_incharge" required>
-                        <option selected disabled> Select Teacher Incharge</option>
+                        <option selected disabled> Select Class Teacher</option>
                     
                               <?php
                                             
@@ -216,7 +272,7 @@ if (isset($_POST['register_cocurri']))
                     </select>
                 </div>
 
-                    <button type="submit" class="btn btn-success float-right" onclick="return confirm('Do You Want To Update Activity'); "name="update_cocurri">UPDATE ACTIVITY DETAILS</button>
+                    <button type="submit" class="btn btn-success float-right" onclick="return confirm('Do You Want To Update Class'); "name="update_class">UPDATE CLASS DETAILS</button>
               </form>
 
         </div>
@@ -245,8 +301,8 @@ if (isset($_POST['register_cocurri']))
         <div class="col-lg-10">
           <div class="statistic d-flex align-items-center bg-white has-shadow">
             <br>
-            <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#regcocurri">
-              New Co-Curricular Activity
+            <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#regclass">
+              New Class
             </button>
             <br>
           </div>
@@ -264,31 +320,42 @@ if (isset($_POST['register_cocurri']))
                     <thead>
                       <tr>
                       
-                          <th>Co-Curr id</th>
-                          <th>Activity Name</th>
-                          <th>Teacher Incharge</th>
+                          <th>Class id</th>
+                          <th>Class Name</th>
+                          <th>No of Students</th>
+                          <th>Section</th>
+                          <th>Class Teacher</th>
                           <th>Action</th>
                       </tr>
                     </thead>
 
                       <?php 
                                 
-                          $get_subject = "SELECT * FROM corecurricularactivities WHERE delete_status=1 ORDER BY idCurricularActivities DESC";
+                          $get_subject = "SELECT * FROM class WHERE delete_status=1 ORDER BY idClass DESC";
                                     
                           $run_rpro = mysqli_query($conn,$get_subject);
               
                           while($row_rpro=mysqli_fetch_array($run_rpro))
                           {
                             /* idSports  SportName TeacherInCharge delete_status status   */
-                              $idcocurri=$row_rpro['idCurricularActivities'];
-                              $cocurriName=$row_rpro['name'];
-                              $TeacherInCharge=$row_rpro['TeacherInCharge'];
+                              $idclass=$row_rpro['idClass'];
+                              $className=$row_rpro['Name'];
+                              $NoStudents=$row_rpro['NoOfStudents'];
+                              $idSec=$row_rpro['section_idSection'];
+                              $classTeacher=$row_rpro['Teacher_idTeacher'];
 
-                               $get_teacher = "SELECT * FROM teacher WHERE idTeacher='$TeacherInCharge' LIMIT 1";     
+                               $get_teacher = "SELECT * FROM teacher WHERE idTeacher='$classTeacher' LIMIT 1";     
                                $res = mysqli_query($conn,$get_teacher);
 
                                if($result=mysqli_fetch_array($res)){
                                   $teacher_name=$result['Name'];
+                                }
+
+                               $get_section = "SELECT * FROM section WHERE idSection='$idSec' LIMIT 1";     
+                               $res = mysqli_query($conn,$get_section);
+
+                               if($result=mysqli_fetch_array($res)){
+                                  $section_name=$result['sectionName'];
                                }
 
                       ?>
@@ -297,8 +364,10 @@ if (isset($_POST['register_cocurri']))
                     <tbody>
                       <tr>
 
-                          <td><?php echo $idcocurri; ?></td>
-                          <td><?php echo $cocurriName; ?></td>
+                          <td><?php echo $idclass; ?></td>
+                          <td><?php echo $className; ?></td>
+                          <td><?php echo $NoStudents; ?></td>
+                          <td><?php echo $section_name; ?></td>
                           <td><?php echo $teacher_name; ?></td>
 
                           <td>
@@ -307,9 +376,9 @@ if (isset($_POST['register_cocurri']))
                                 <i class="fa fa-ellipsis-h"></i>
                               </a>
                               <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item cocurri1" href="cocurri_register.php" data-id="<?php echo $idcocurri; ?>" data-toggle="modal" data-target="#updatecocurri"><i class="fa fa-edit"></i> Edit</a>
+                                    <a class="dropdown-item class1" href="class_register.php" data-id="<?php echo $idclass; ?>" data-toggle="modal" data-target="#updateclass"><i class="fa fa-edit"></i> Edit</a>
 
-                                    <a class="dropdown-item" href="cocurri_register.php?delete_id=<?php echo $idcocurri; ?>"  onclick="return confirm('Do You Want To Delete Activity');"><i class="fa fa-trash"></i> Delete</a>
+                                    <a class="dropdown-item" href="class_register.php?delete_id=<?php echo $idclass; ?>"  onclick="return confirm('Do You Want To Delete Class');"><i class="fa fa-trash"></i> Delete</a>
                               </div>
                             </div>
                            </td>
@@ -340,18 +409,18 @@ if (isset($_POST['register_cocurri']))
       $('#example').DataTable();
       // console.log(1)
       $('#mainForm').parsley();
-      // console.log(2)
+      
       // $('.sl2').select2();
       // console.log(3)
 
 
-    $('.cocurri1').click(function(){
-
+    $('.class1').click(function(){
+// console.log(2)
         var sport_id1=$(this).data('id');
 
           $.ajax({
 
-                url:'cocurri_update_ajax.php',
+                url:'class_update_ajax.php',
 
                 type:'post',
 
@@ -364,11 +433,13 @@ if (isset($_POST['register_cocurri']))
                     var d=data.split('~');
 
                     if (d[0]==1) {
-                            $('#cocurri_id').val(d[1]);
-                            $('#hidden_cocurri_id').val(d[1]);
-                            $('#cocurri_name').val(d[2]);
-                            $('#teacher_incharge').val(d[3]);
-                    }
+                            $('#class_id').val(d[1]);
+                            $('#hidden_class_id').val(d[1]);
+                            $('#class_name').val(d[2]);
+                            $('#no_students').val(d[3]);
+                            $('#section_id').val(d[4]);
+                            $('#class_Teacher').val(d[5]);
+                }
 
             }
           });
