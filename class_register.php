@@ -408,9 +408,9 @@ if (isset($_POST['register_class']))
       // console.log(0)
       $('#example').DataTable();
       // console.log(1)
-      // $('#mainForm').parsley();
+      $('#mainForm').parsley();
       
-      // $('.sl2').select2();
+      $('.sl2's).select2();
       // console.log(3)
 
 

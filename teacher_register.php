@@ -160,7 +160,7 @@ if (isset($_POST['register_teacher']))
         {
            $sql="UPDATE teacher SET delete_status = 0 WHERE idTeacher='$id'";
            mysqli_query($conn,$sql);
-           echo "<script>window.open('teacher_registration.php','_self')</script>";
+           echo "<script>window.open('teacher_register.php','_self')</script>";
         }
     }
 
@@ -209,7 +209,7 @@ if (isset($_POST['register_teacher']))
             $temp_img1 = $_FILES['p_image']['tmp_name'];
 
 
-            if ($appoiment_date >= $first_appoiment_date) 
+            if ($appoiment_date < $first_appoiment_date) 
             {
                   array_push($error, "<br>Invalied appoiment date");
             }
@@ -276,7 +276,7 @@ if (isset($_POST['register_teacher']))
 <!-- =====================================The insert teacher modal ========================================-->
   <div class="modal fade" id="regtr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-    <div class="modal-dialog"  role="document">
+    <div class="modal-dialog modal-lg"   role="document">
       <div class="modal-content">
       
         <!-- Modal Header -->
@@ -299,27 +299,28 @@ if (isset($_POST['register_teacher']))
 
 <!-- Login Information -->
                 <h3 class="text-success">Login Information</h3>
+                <div class="row clearfix">
+                        <div class="col-sm-3">
+                        </div>
+                <div class="col-sm-6">
 
                     <div class="form-group">
-                      <label for="user_name">User Name:</label>
-                      <input type="text" class="form-control" placeholder="Enter User Name" name="user_name" required data-parsley-pattern="^[a-zA-Z0-9 ]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="User Name" name="user_name" required data-parsley-pattern="^[a-zA-Z0-9 ]+$" data-parsley-trigger="keyup"/>
                     </div>
+
                     <div class="form-group">
-                      <label for="email">Email:</label>
-                      <input type="email" class="form-control" placeholder="Enter Email" name="email1" required data-parsley-type="email" data-parsley-trigger="keyup"/>
+                      <input type="email" class="form-control" placeholder="Email" name="email1" required data-parsley-type="email" data-parsley-trigger="keyup"/>
                     </div>
+
                     <div class="form-group">
-                      <label for="password">Password:</label>
-                      <input type="password" class="form-control" id="pw" placeholder="Enter Password" name="password" required data-parsley-length=[8,16] data-parsley-trigger="keyup"/>
+                      <input type="password" class="form-control" id="pw" placeholder="Password" name="password" required data-parsley-length=[8,16] data-parsley-trigger="keyup"/>
                     </div>
+
                     <div class="form-group">
-                      <label for="confirm_password">Confirm Password:</label>
                       <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required data-parsley-equalto="#pw" data-parsley-trigger="keyup"/>
                     </div>
-                    <div class="form-group">
-                      <label for="image">Profile Image:</label>
-                      <input type="file" class="form-control" placeholder="Add Profile Image" name="p_image">
-                    </div>
+
+
                     <div class="form-group">
                       <label for="user_type">User Type:</label>
                         <select class="form-control" name="previlages" required>
@@ -332,15 +333,20 @@ if (isset($_POST['register_teacher']))
                     </div>
 
                      <div class="form-group">
-                      <label for="exp">Extra User Permissions:</label>
                       <input type="text" class="form-control" placeholder="Enter Extra User Permissions" name="ex_previlages" data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup"/>
                     </div>
 
+                </div>
+
+                <div class="col-sm-3">
+                        </div>
+                </div>
+
                 <br>
 
-<!-- Personal Information -->
+<!-- Genaral Information -->
                 <h3 class="text-success">Personal Information</h3>
-
+                  <div class="col-sm-4">
                     <div class="form-group">
                       <label for="title">Title:</label>
                       <select class="form-control" name="title" required>
@@ -351,47 +357,88 @@ if (isset($_POST['register_teacher']))
                         <option value="Mrs.">Mrs.</option>
                       </select>
                     </div>
+                  </div>
+
+
+                  <div class="col-sm-12">
                     <div class="form-group">
-                      <label for="name">Full Name:</label>
-                      <input type="text" class="form-control" placeholder="Enter Full Name"name="full_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                      <div class="form-line">
+                      <input type="text" class="form-control" placeholder="Name with Intials"name="full_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                      </div>
                     </div>
+                  </div>
+
+
+            <div class="col-sm-12">
+                  <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="title">Gender:</label>
                       <select class="form-control" name="gender" required>
-                        <option selected disabled> Select</option>
+                        <option selected disabled> Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                       </select>
                     </div>
+                  </div>
+
+                  <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="sivil">Civil Status:</label>
                       <select class="form-control" name="civil" required>
-                        <option selected disabled> Select</option>
+                        <option selected disabled> Civil Status</option>
                         <option value="Married">Married</option>
                         <option value="Widowed">Widowed</option>
                         <option value="Divorced">Divorced</option>
                         <option value="Single">Single</option>
                       </select>
                     </div> 
+                  </div>
+            </div>
+
+
+            <div class="col-sm-12">
+                  <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="Nationality">Nationality:</label>
-                      <input type="text" class="form-control" placeholder="Enter Nationality" name="nationality" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                      <div class="form-line">
+                      <input type="text" class="form-control" placeholder="Nationality" name="nationality" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                      </div>
                     </div>
+                  </div>
+
+                  <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="tp">Telephone No:</label>
-                      <input type="text" class="form-control" placeholder="Enter Telephone No" name="tp" data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="National Identity Card Number" name="nic" required data-parsley-pattern="^[0-9Vv]+$" data-parsley-trigger="keyup"/>
                     </div>
+                  </div>
+            </div>
+
+
+                  <div class="col-sm-12">
                     <div class="form-group">
+                      <div class="form-line">
+                      <input type="text" class="form-control" placeholder="Telephone Number" name="tp" data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <div class="form-line">
                       <label for="wno">Whatsapp No:</label>
-                      <input type="text" class="form-control" placeholder="Enter Whatsapp No" name="wno" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Telephone No (Whatsapp)" name="wno" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                      </div>
                     </div>
+                  </div>
+
+                  <div class="col-sm-12">
                     <div class="form-group">
                       <label for="address">Address:</label>
-                      <input type="text" class="form-control" placeholder="Enter Address" name="address" required data-parsley-pattern="^[a-zA-Z0-9 ,.]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Postal Address" name="address" required data-parsley-pattern="^[a-zA-Z0-9 ,.]+$" data-parsley-trigger="keyup"/>
                     </div>
+                  </div>
+
+
                     <div class="form-group">
-                      <label for="nic">NIC:</label>
-                      <input type="text" class="form-control" placeholder="Enter NIC" name="nic" required data-parsley-pattern="^[0-9Vv]+$" data-parsley-trigger="keyup"/>
+                      <label for="image">Profile Image:</label>
+                      <input type="file" class="form-control" placeholder="Profile Image" name="p_image">
                     </div>
 
                 <br>
@@ -399,50 +446,57 @@ if (isset($_POST['register_teacher']))
 <!-- Professional Information -->
                 <h3 class="text-success">Professional Information</h3>
 
-                <div class="form-group">
-                  <label for="fap_date">First Appoiment Date:</label>
-                  <input type="date" class="form-control" placeholder="Enter First Appoiment Date" name="first_appoiment_date" required>
+                <div class="form-group col-sm-5">
+                  <label for="ap_date">First Appoiment Date</label>
+                  <input type="date" class="form-control" placeholder="First Appoiment Date" name="first_appoiment_date" required>
                 </div>
-                <div class="form-group">
-                  <label for="a_subject">Appoiment Subject:</label>
-                  <input type="text" class="form-control" placeholder="Enter Appoiment Subject" name="appoiment_subject" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+
+                <div class="form-group col-sm-5">
+                  <input type="text" class="form-control" placeholder="Appoiment Subject" name="appoiment_subject" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                 </div> 
-                <div class="form-group">
-                  <label for="medium">Medium:</label>
+
+                <div class="form-group col-sm-5">
                   <select class="form-control" name="medium" required>
-                   <option selected disabled> Select</option>
+                   <option selected disabled> Medium</option>
                     <option value="Sinhala">Sinhala</option>
                     <option value="English">English</option>
                     <option value="Tamil">Tamil</option>
                     <option value="other">Other</option>
                   </select>
-                </div>                 
+                </div>   
+
+                <div class="form-group col-sm-5">
+                  <select class="form-control" name="sg" required>
+                   <option selected disabled> Service Grade</option>
+                    <option value="3 - I">3 - I</option>
+                    <option value="2 - II">2 - II</option>
+                    <option value="2 - I">2 - I</option>
+                    <option value="1">1</option>
+                  </select>
+                </div> 
+
                 <div class="form-group">
-                  <label for="sg">Service Grade:</label>
-                  <input type="text" class="form-control" placeholder="Enter Service Grade" name="sg" required data-parsley-pattern="^[a-zA-Z0-9 ]+$" data-parsley-trigger="keyup"/>
-                </div>
-                <div class="form-group">
-                  <label for="eq">Educational Qualification:</label>
                   <input type="text" class="form-control" placeholder="Enter Education Qualification" name="eq" required data-parsley-pattern="^[a-zA-Z. ]+$" data-parsley-trigger="keyup"/>
                 </div>
+
                 <div class="form-group">
-                  <label for="pq">Professional Qualification:</label>
                   <input type="text" class="form-control" placeholder="Enter Prafessional Qualification" name="pq" required data-parsley-pattern="^[a-zA-Z. ]+$" data-parsley-trigger="keyup"/>
                 </div>
-                <div class="form-group">
+
+                <div class="form-group col-sm-5">
                   <label for="ap_date">Appoiment Date in this school:</label>
                   <input type="date" class="form-control" placeholder="Enter Appoiment Date" name="appoiment_date" required>
                 </div> 
-                <div class="form-group">
-                  <label for="wnopNumber">Wnop No:</label>
-                  <input type="text" class="form-control" placeholder="Enter Wnop No" name="wnop_number" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+
+                <div class="form-group col-sm-5">
+                  <input type="text" class="form-control" placeholder="WNOP No" name="wnop_number" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                 </div>
-                <div class="form-group">
-                  <label for="PaysheetNumber">Paysheet Number:</label>
-                  <input type="text" class="form-control" placeholder="Enter Paysheet Number" name="paysheet" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+
+                <div class="form-group col-sm-5">
+                  <input type="text" class="form-control" placeholder="Paysheet Number" name="paysheet" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                 </div>  
 
-                 <button type="submit" class="btn btn-success" name="register_teacher">REGISTER</button>
+                 <button type="submit" class="btn btn-success float-right" name="register_teacher">REGISTER</button>
               </form>
 
         </div>
@@ -470,12 +524,12 @@ if (isset($_POST['register_teacher']))
 <!-- ================================= update teacher modal ========================================-->
 
   <div class="modal fade" id="update_modal">
-    <div class="modal-dialog ">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
       
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Teacher update Form</h4>
+        <div class="modal-header bg-success">
+          <h4 class="modal-title text-white">Teacher update Form</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -493,15 +547,20 @@ if (isset($_POST['register_teacher']))
 
 <!-- Personal Information -->
                 <h3 class="text-success">Personal Information</h3>
+
                 <div class="form-group">
                   <label for="name">Teacher id:</label>
                   <input type="text" id="teacher_id1" name="idTeacher" class="form-control" placeholder="Enter teacher id" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup" disabled />
                 </div>
 
+                 <div class="form-group">
+                  <input type="hidden" id="hidden_teacher_id1" name="hidden_teacher_id" class="form-control" placeholder="Enter Full Name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup" />
+                </div>
+
 
                     <div class="form-group">
                       <label for="title">Title:</label>
-                      <select class="form-control" name="title" required>
+                      <select class="form-control" name="title" id="teacher_title1" required>
                         <option selected disabled> Select</option>
                         <option value="Rev.">Rev.</option>
                         <option value="Mr.">Mr.</option>
@@ -509,46 +568,58 @@ if (isset($_POST['register_teacher']))
                         <option value="Mrs.">Mrs.</option>
                       </select>
                     </div>
+
                     <div class="form-group">
                       <label for="name">Full Name:</label>
-                      <input type="text" class="form-control" placeholder="Enter Full Name"name="full_name" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Full Name" name="full_name" id="teacher_name1" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                     </div>
+
                     <div class="form-group">
-                      <label for="title">Gender:</label>
-                      <select class="form-control" name="gender" required>
-                        <option selected disabled> Select</option>
+                      <select class="form-control" name="gender" id="teacher_gender1" required>
+                        <option selected disabled> Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                       </select>
                     </div>
+
                     <div class="form-group">
-                      <label for="sivil">Civil Status:</label>
-                      <select class="form-control" name="civil" required>
-                        <option selected disabled> Select</option>
-                        <option value="Maried">Maried</option>
-                        <option value="Unmaried">Unmaried</option>
+                      <select class="form-control" name="civil" id="teacher_civil1" required>
+                        <option selected disabled> Civil Status</option>
+                        <option value="Married">Married</option>
+                        <option value="Widowed">Widowed</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Single">Single</option>
                       </select>
                     </div> 
+
                     <div class="form-group">
                       <label for="Nationality">Nationality:</label>
-                      <input type="text" class="form-control" placeholder="Enter Nationality" name="nationality" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Nationality" name="nationality" id="teacher_nationality1" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                     </div>
+
+                    <div class="form-group">
+                      <label for="nic">NIC:</label>
+                      <input type="text" class="form-control" placeholder="National Identity Card Number" name="nic" id="teacher_nic1" required data-parsley-pattern="^[0-9Vv]+$" data-parsley-trigger="keyup"/>
+                    </div>
+
                     <div class="form-group">
                       <label for="tp">Telephone No:</label>
-                      <input type="text" class="form-control" placeholder="Enter Telephone No" name="tp" data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Telephone No" name="tp" id="teacher_tp1" data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                     </div>
                     <div class="form-group">
                       <label for="wno">Whatsapp No:</label>
-                      <input type="text" class="form-control" placeholder="Enter Whatsapp No" name="wno" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Whatsapp No" name="wno" id="teacher_whatsapp1" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                     </div>
                     <div class="form-group">
                       <label for="address">Address:</label>
-                      <input type="text" class="form-control" placeholder="Enter Address" name="address" required data-parsley-pattern="^[a-zA-Z0-9 ,.]+$" data-parsley-trigger="keyup"/>
+                      <input type="text" class="form-control" placeholder="Address" name="address" id="teacher_address1" required data-parsley-pattern="^[a-zA-Z0-9 ,.]+$" data-parsley-trigger="keyup"/>
                     </div>
+
                     <div class="form-group">
-                      <label for="nic">NIC:</label>
-                      <input type="text" class="form-control" placeholder="Enter NIC" name="nic" required data-parsley-pattern="^[0-9Vv]+$" data-parsley-trigger="keyup"/>
+                      <label for="image">Profile Image:</label>
+                      <input type="file" class="form-control" placeholder="Profile Image" name="p_image">
                     </div>
+
 
                 <br>
 
@@ -556,17 +627,16 @@ if (isset($_POST['register_teacher']))
                 <h3 class="text-success">Professional Information</h3>
 
                 <div class="form-group">
-                  <label for="fap_date">First Appoiment Date:</label>
-                  <input type="date" class="form-control" placeholder="Enter First Appoiment Date" name="first_appoiment_date" required>
+                  <label for="fap_date">First Appointment Date:</label>
+                  <input type="date" class="form-control" placeholder="First Appoiment Date" name="first_appoiment_date" id="teacher_fad1" required>
                 </div>
                 <div class="form-group">
                   <label for="a_subject">Appoiment Subject:</label>
-                  <input type="text" class="form-control" placeholder="Enter Appoiment Subject" name="appoiment_subject" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Appoiment Subject" name="appoiment_subject" id="teacher_as1" required data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-trigger="keyup"/>
                 </div> 
                 <div class="form-group">
-                  <label for="medium">Medium:</label>
-                  <select class="form-control" name="medium" required>
-                   <option selected disabled> Select</option>
+                  <select class="form-control" name="medium" id="teacher_medium1" required>
+                   <option selected disabled> Medium</option>
                     <option value="Sinhala">Sinhala</option>
                     <option value="English">English</option>
                     <option value="Tamil">Tamil</option>
@@ -574,28 +644,37 @@ if (isset($_POST['register_teacher']))
                   </select>
                 </div>                 
                 <div class="form-group">
-                  <label for="sg">Service Grade:</label>
-                  <input type="text" class="form-control" placeholder="Enter Service Grade" name="sg" required data-parsley-pattern="^[a-zA-Z0-9 ]+$" data-parsley-trigger="keyup"/>
+                  <select class="form-control" name="sg" id="teacher_sg1" required>
+                   <option selected disabled> Service Grade</option>
+                    <option value="3 - I">3 - I</option>
+                    <option value="2 - II">2 - II</option>
+                    <option value="2 - I">2 - I</option>
+                    <option value="1">1</option>
+                  </select>
                 </div>
+
                 <div class="form-group">
                   <label for="eq">Educational Qualification:</label>
-                  <input type="text" class="form-control" placeholder="Enter Education Qualification" name="eq" required data-parsley-pattern="^[a-zA-Z. ]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Education Qualification" name="eq" id="teacher_eq1" required data-parsley-pattern="^[a-zA-Z. ]+$" data-parsley-trigger="keyup"/>
                 </div>
+
                 <div class="form-group">
                   <label for="pq">Professional Qualification:</label>
-                  <input type="text" class="form-control" placeholder="Enter Prafessional Qualification" name="pq" required data-parsley-pattern="^[a-zA-Z. ]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Professional Qualification" name="pq" id="teacher_pq1" required data-parsley-pattern="^[a-zA-Z. ]+$" data-parsley-trigger="keyup"/>
                 </div>
+
                 <div class="form-group">
-                  <label for="ap_date">Appoiment Date in this school:</label>
-                  <input type="date" class="form-control" placeholder="Enter Appoiment Date" name="appoiment_date" required>
+                  <label for="ap_date">Appointment Date in this school:</label>
+                  <input type="date" class="form-control" placeholder="Enter Appoiment Date" name="appoiment_date" id="teacher_ad1" required>
                 </div> 
+
                 <div class="form-group">
                   <label for="wnopNumber">Wnop No:</label>
-                  <input type="text" class="form-control" placeholder="Enter Wnop No" name="wnop_number" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Wnop No" name="wnop_number" id="teacher_wnop1" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                 </div>
                 <div class="form-group">
                   <label for="PaysheetNumber">Paysheet Number:</label>
-                  <input type="text" class="form-control" placeholder="Enter Paysheet Number" name="paysheet" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
+                  <input type="text" class="form-control" placeholder="Paysheet Number" name="paysheet" id="teacher_paysheet1" required data-parsley-pattern="^[0-9]+$" data-parsley-trigger="keyup"/>
                 </div>  
 
                 <div class="form-group">                      
@@ -615,7 +694,7 @@ if (isset($_POST['register_teacher']))
                       </div>
 
 
-                   </div> 
+                </div> 
                  <button type="submit" class="btn btn-success float-right" name="update_teacher"  onclick="return confirm('Do You Want To Update Teacher');">UPDATE TEACHER DETAILS</button>
               </form>
 
@@ -642,12 +721,12 @@ if (isset($_POST['register_teacher']))
 
 <!-- ================================= view teacher details modal ========================================-->
 <div class="modal fade" id="view_teacher_details">
-  <div class="modal-dialog">
+  <div class="modal-dialog ">
     <div class="modal-content">
 
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Teacher Details</h4>
+      <div class="modal-header bg-success">
+          <h4 class="modal-title text-white">Teacher Details</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <!-- Modal body -->
@@ -745,9 +824,9 @@ if (isset($_POST['register_teacher']))
                         <i class="fa fa-ellipsis-h"></i>
                       </a>
                       <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item teach" href="teacher_registration.php" data-id="<?php echo $idTeacher; ?>" data-toggle="modal" data-target="#update_modal"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="dropdown-item teach" href="teacher_register.php" data-id="<?php echo $idTeacher; ?>" data-toggle="modal" data-target="#update_modal"><i class="fa fa-pencil"></i> Edit</a>
 
-                            <a class="dropdown-item" href="teacher_registration.php?delete_id=<?php echo $idTeacher; ?>"  onclick="return confirm('Do You Want To Delete Teacher');"><i class="fa fa-trash"></i> Delete</a>
+                            <a class="dropdown-item" href="teacher_register.php?delete_id=<?php echo $idTeacher; ?>"  onclick="return confirm('Do You Want To Delete Teacher');"><i class="fa fa-trash"></i> Delete</a>
                       </div>
                     </div>
                   </td>

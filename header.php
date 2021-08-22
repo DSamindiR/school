@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SMS</title>
+    <title>School Management System</title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
@@ -26,7 +26,15 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- <link href="css/parsley.css" rel="stylesheet"> -->
+    <link href="css/parsley.css" rel="stylesheet"> 
+
+    <link href="css/select2.min.css" rel="stylesheet">
+
+    <!-- wizad -->
+   <link rel="stylesheet" href="css/wizad/form-elements.css">
+   <link rel="stylesheet" href="css/wizad/style.css">
+
+
 
 </head>
 
@@ -61,7 +69,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -73,24 +81,81 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <!-- <div class="sidebar-heading">
                 Interface
-            </div>
+            </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="user" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="teacher_register.php">Teacher</a>
+                        <a class="collapse-item" href="student_registration.php">Student</a>
+                        <a class="collapse-item" href="user_register.php">User</a>
                     </div>
                 </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#activity"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-object-group"></i>
+                    <span>Student Activities</span>
+                </a>
+                <div id="activity" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="teacher_register.php">Sport</a>
+                        <a class="collapse-item" href="student_register.php">Co-Curricular</a>
+                        <a class="collapse-item" href="teacher_register.php">Ex-Curricular</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#class"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-sitemap"></i>
+                    <span>Class & Section</span>
+                </a>
+                <div id="class" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="class_register.php">Class</a>
+                        <a class="collapse-item" href="section_register.php">Section</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="guardian_registration.php">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Guardians</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="scholarship_registration.php">
+                    <i class="fas fa-fw fa-graduation-cap"></i>
+                    <span>Scholarship</span></a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="vaccine_register.php">
+                    <i class="fas fa-fw fa-medkit"></i>
+                    <span>Vaccination</span></a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="inquiry_register.php">
+                    <i class="fas fa-fw fa-question-circle"></i>
+                    <span>Inquiry</span></a>
             </li>
 
 
@@ -115,8 +180,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">

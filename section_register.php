@@ -345,9 +345,9 @@
       // console.log(0)
       $('#example').DataTable();
       // console.log(1)
-      // $('#mainForm').parsley();
+      $('#mainForm').parsley();
       // console.log(2)      
-      // $('.sl2').select2();
+      $('.sl2').select2();
       // console.log(3)
 
 

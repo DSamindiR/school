@@ -78,11 +78,20 @@
     <!-- Fontawsome -->
     <script src="vendor/fontawesome-free/fontawesome.js"></script>
 
-    <!-- <script src="vendor/parsley.js"></script> -->
+    <script src="vendor/parsley.js"></script>
+    <script src="vendor/parsley.min.js"></script>
+
+    <script src="vendor/select2.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    
+    <!--wizad  -->
+        <script src="js/wizad/jquery.backstretch.min.js"></script>
+        <script src="js/wizad/retina-1.1.0.min.js"></script>
+        <script src="js/wizad/scripts.js"></script>
+
 
 </body>
 

@@ -9,9 +9,9 @@ textarea.parsley-success {
 input.parsley-error,
 select.parsley-error,
 textarea.parsley-error {
-  color: #B94A48;
-  background-color: #F2DEDE;
-  border: 1px solid #EED3D7;
+  color: #ff322e;
+  background-color: #ffd83b;
+  border: 1px solid #ff3b58;
 }
 
 .parsley-errors-list {
@@ -20,8 +20,8 @@ textarea.parsley-error {
   list-style-type: none;
   font-size: 0.9em;
   line-height: 0.9em;
-  opacity: 0;
-  color: #B94A48;
+  opacity: 1;
+  color: #ff4a4a;
 
   transition: all .3s ease-in;
   -o-transition: all .3s ease-in;
