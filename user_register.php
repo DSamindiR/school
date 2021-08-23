@@ -13,20 +13,15 @@ if (isset($_POST['register_user']))
             $password=mysqli_real_escape_string($conn, $_POST['password']);
             $previlages=mysqli_real_escape_string($conn, $_POST['previlages']);
             $ex_previlages=mysqli_real_escape_string($conn, $_POST['ex_previlages']);
-            $wno=mysqli_real_escape_string($conn, $_POST['wno']);
-            $address=mysqli_real_escape_string($conn, $_POST['address']);
             $first_name=mysqli_real_escape_string($conn, $_POST['first_name']);
             $last_name=mysqli_real_escape_string($conn, $_POST['last_name']);
-            $dob=mysqli_real_escape_string($conn, $_POST['dob']);
-            $nic=mysqli_real_escape_string($conn, $_POST['nic']);
+           
 
-            $user_img = $_FILES['p_image']['name'];
-            $temp_img1 = $_FILES['p_image']['tmp_name'];
 
             $epw=sha1($password);
 
             /*iduser  userName  password  email extra_previlages  previlages_idpre*/
-            $sql_select="SELECT * FROM user WHERE userName='$user_name' OR email='$email1' OR nic='$nic' LIMIT 1";
+            $sql_select="SELECT * FROM user WHERE userName='$user_name' OR email='$email1' LIMIT 1";
             $result=mysqli_query($conn, $sql_select);
             $user=mysqli_fetch_array($result);
 
@@ -40,10 +35,7 @@ if (isset($_POST['register_user']))
                 {
                     array_push($error, "<br>Email already exists");
                 }
-                if ($user['nic']===$nic) 
-                {
-                    array_push($error, "<br>NIC already exists");
-                }
+                
             }
 
 
@@ -56,7 +48,7 @@ iduser,userName,password,email,extra_previlages,previlages_idprevilages,delete_s
                    {
                       move_uploaded_file($temp_img1, "img/$user_img");
 
-                      $sql="INSERT INTO user(userName,password,email,extra_previlages,previlages_idprevilages,delete_status,status,first_name,last_name,img,address,nic,telephone,DOB) VALUES('$user_name','$epw','$email1','$ex_previlages','$previlages',1,0,'$first_name','$last_name','$user_img','$address','$nic','$wno','$dob')";
+                      $sql="INSERT INTO user(userName,password,email,extra_previlages,previlages_idprevilages,delete_status,status,first_name,last_name) VALUES('$user_name','$epw','$email1','$ex_previlages','$previlages',1,0,'$first_name','$last_name')";
 
                         if(mysqli_query($conn,$sql))
                         {
@@ -70,16 +62,16 @@ iduser,userName,password,email,extra_previlages,previlages_idprevilages,delete_s
                    }
                    else
                    {
-                       $sql="INSERT INTO user(userName,password,email,extra_previlages,previlages_idprevilages,delete_status,status,first_name,last_name,address,nic,telephone,DOB) VALUES('$user_name','$epw','$email1','$ex_previlages','$previlages',1,0,'$first_name','$last_name','$address','$nic','$wno','$dob')";
+                       $sql="INSERT INTO user(userName,password,email,extra_previlages,previlages_idprevilages,delete_status,status,first_name,last_name) VALUES('$user_name','$epw','$email1','$ex_previlages','$previlages',1,0,'$first_name','$last_name')";
                     
 
                         if(mysqli_query($conn,$sql))
                         {
-                            ?><script type="text/javascript">alert("Teacher Registerd");</script><?php
+                            ?><script type="text/javascript">alert("User Registerd");</script><?php
                         }
                         else
                         {
-                          ?><script type="text/javascript">alert("Teacher Register error");</script><?php
+                          ?><script type="text/javascript">alert("User Register error");</script><?php
                         }
                    }
 
